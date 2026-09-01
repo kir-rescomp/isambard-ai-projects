@@ -1,0 +1,12 @@
+uv pip install cellbender
+
+# Clear the cu13 stack
+uv pip list --format=freeze \
+  | grep -E '^(torch|torchvision|torchaudio|triton|nvidia-)' \
+  | cut -d= -f1 | xargs uv pip uninstall
+
+# Install pinned to the local version
+uv pip install "torch==2.9.1+cu126" \
+  --index-url https://download.pytorch.org/whl/cu126 \
+  --extra-index-url https://pypi.org/simple \
+  --index-strategy unsafe-best-match
