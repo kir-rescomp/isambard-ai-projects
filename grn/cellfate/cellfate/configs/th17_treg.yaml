@@ -1,0 +1,29 @@
+# Production configuration: Treg -> Th17 transition rate at one cytokine point.
+dtype: float64
+
+model:
+  name: th17_treg
+  scale: 3.0          # system size, i.e. barrier height. 1 = shallow, >=3 = rare-event regime
+  il6: 1.0            # STAT3 input driving RORgt
+  tgfb_il2: 1.0       # STAT5 input driving FOXP3
+
+bins:
+  lo: -0.9
+  hi: 0.9
+  n_bins: 32          # bin 0 = Treg basin (source), bin 31 = Th17 basin (target)
+
+basin_walkers: 4096
+basin_steps: 3000     # relaxation into the Treg basin before sampling begins
+
+we:
+  tau: 0.01           # leap size
+  n_substeps: 200     # tau_gen = 2.0 time units (0.2 protein lifetimes)
+  n_generations: 3000
+  walkers_per_bin: 128
+  initial_walkers: 8192
+  resampling: systematic
+  recycle: true
+  seed: 20260901
+  log_every: 100
+  checkpoint_every: 250
+  checkpoint_path: checkpoints/th17_treg
