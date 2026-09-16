@@ -1,0 +1,31 @@
+# Cytokine sweep: transition rate across the IL-6 / (TGF-beta + IL-2) plane.
+# 7 x 7 = 49 grid points.  With --shard-by-rank each rank takes points
+# independently and the campaign needs no collectives at all.
+dtype: float64
+
+model:
+  name: th17_treg
+  scale: 3.0
+
+sweep:
+  il6:      [0.4, 0.6, 0.8, 1.0, 1.25, 1.6, 2.0]
+  tgfb_il2: [0.4, 0.6, 0.8, 1.0, 1.25, 1.6, 2.0]
+
+bins:
+  lo: -0.9
+  hi: 0.9
+  n_bins: 32
+
+basin_walkers: 4096
+basin_steps: 3000
+
+we:
+  tau: 0.01
+  n_substeps: 200
+  n_generations: 1500
+  walkers_per_bin: 4096   # see docs/RUNBOOK.md: sized to the measured knee
+  initial_walkers: 32768
+  resampling: systematic
+  recycle: true
+  seed: 20260901
+  log_every: 500

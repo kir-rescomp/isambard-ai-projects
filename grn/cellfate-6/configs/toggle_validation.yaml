@@ -1,0 +1,17 @@
+# Low-barrier validation case: brute force can cross this barrier, so the
+# weighted-ensemble rate can be checked against direct simulation.
+dtype: float64
+model:
+  name: toggle
+  scale: 0.5
+bins: {lo: -0.9, hi: 0.9, n_bins: 24}
+basin_walkers: 1024
+basin_steps: 1000
+we:
+  tau: 0.01
+  n_substeps: 200
+  n_generations: 1500
+  walkers_per_bin: 32
+  initial_walkers: 768
+  seed: 5
+  log_every: 250
