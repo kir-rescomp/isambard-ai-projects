@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # kir_prompt.sh — Oxford blue & gold bash prompt with git branch awareness
-#
+# Author - Dinindu Senanayake
 # Usage:
 #   Add this line to your ~/.bashrc:
 #     source /path/to/kir_prompt.sh
